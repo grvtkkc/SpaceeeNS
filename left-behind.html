@@ -1,0 +1,519 @@
+<title>Left Behind</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a journey outward. Chapters are ordered by signal delay from Earth; a sticky
+   readout tracks the delay as you scroll. Exhibits read like museum placards. Single dark theme by choice. */
+:root {
+  --void: #0b0f1a;
+  --void-2: #121829;
+  --line: #273049;
+  --regolith: #e6e2d9;
+  --dust: #9aa0b2;
+  --foil: #d9a441;      /* Kapton gold foil */
+  --foil-dim: #8a6a2c;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--void);
+  color: var(--regolith);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.65;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--void);
+}
+a { color: var(--foil); }
+:focus-visible { outline: 2px solid var(--foil); outline-offset: 3px; }
+
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- HUD ---------- */
+.hud {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: color-mix(in srgb, var(--void) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+}
+.hud .wrap { display: flex; gap: 16px; align-items: center; justify-content: space-between; padding-block: 10px; flex-wrap: wrap; }
+.hud nav { display: flex; gap: 18px; flex-wrap: wrap; }
+.hud nav a { color: var(--dust); text-decoration: none; }
+.hud nav a:hover, .hud nav a.on { color: var(--regolith); }
+.hud .delay { color: var(--dust); }
+.hud .delay b { color: var(--foil); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+/* ---------- HERO ---------- */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero .wrap { position: relative; padding-block: 96px 64px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--foil); margin: 0 0 20px; }
+h1 {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(48px, 11vw, 132px); line-height: .92; letter-spacing: -.03em;
+  margin: 0 0 28px; text-wrap: balance;
+}
+h1 span { display: block; color: transparent; -webkit-text-stroke: 1.5px var(--regolith); }
+.lede { max-width: 56ch; font-size: clamp(18px, 2.2vw, 21px); color: var(--regolith); margin: 0 0 48px; }
+
+/* signal-delay scale */
+.scale { max-width: 760px; }
+.scale-title { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--dust); margin: 0 0 14px; }
+.track { position: relative; height: 74px; }
+.track .axis { position: absolute; left: 0; right: 0; top: 36px; height: 1px; background: var(--line); }
+.tick, .mark { position: absolute; transform: translateX(-50%); font-family: var(--mono); font-size: 11px; white-space: nowrap; }
+.tick { top: 32px; color: var(--dust); }
+.tick::before { content: ""; display: block; width: 1px; height: 9px; background: var(--dust); margin: 0 auto 6px; opacity: .6; }
+.mark { top: 0; color: var(--foil); text-align: center; }
+.mark::after { content: ""; display: block; width: 9px; height: 9px; border-radius: 50%; background: var(--foil); margin: 6px auto 0; box-shadow: 0 0 0 4px color-mix(in srgb, var(--foil) 22%, transparent); }
+.tick.first { transform: none; } .tick.first::before { margin-left: 0; }
+.tick.last { transform: translateX(-100%); } .tick.last::before { margin-right: 0; }
+.scale-note { font-size: 13px; color: var(--dust); margin: 6px 0 0; }
+
+/* ---------- CHAPTERS ---------- */
+.chapter { border-bottom: 1px solid var(--line); scroll-margin-top: 44px; }
+.chapter > .wrap { padding-block: 88px 72px; }
+.ch-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: end; margin-bottom: 56px; }
+.ch-num { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--dust); margin: 0 0 12px; }
+h2 { font-family: var(--display); font-weight: 600; font-size: clamp(34px, 6vw, 64px); line-height: 1; letter-spacing: -.02em; margin: 0 0 18px; text-wrap: balance; }
+.ch-intro { max-width: 60ch; color: var(--regolith); margin: 0; }
+.ch-delay { text-align: right; font-family: var(--mono); }
+.ch-delay .v { font-size: clamp(34px, 5vw, 52px); color: var(--foil); line-height: 1; font-variant-numeric: tabular-nums; }
+.ch-delay .u { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--dust); margin-top: 8px; }
+
+.exhibits { display: grid; gap: 0; }
+.exhibit {
+  display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 20px 48px;
+  padding-block: 36px; border-top: 1px solid var(--line);
+}
+.exhibit h3 { font-family: var(--display); font-weight: 600; font-size: 22px; line-height: 1.2; margin: 0 0 14px; text-wrap: balance; }
+.status {
+  display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--foil); border: 1px solid var(--foil-dim); border-radius: 2px; padding: 3px 8px;
+}
+.placard { margin: 18px 0 0; display: grid; gap: 10px; font-size: 14px; }
+.placard div { display: grid; gap: 1px; }
+.placard dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--dust); }
+.placard dd { margin: 0; color: var(--regolith); }
+.story p { margin: 0 0 14px; max-width: 64ch; }
+.story p:last-child { margin-bottom: 0; }
+.aside {
+  font-family: var(--mono); font-size: 13.5px; line-height: 1.6; color: var(--dust);
+  border-left: 2px solid var(--foil-dim); padding-left: 14px; margin-top: 18px !important;
+}
+
+/* ---------- EPILOGUE ---------- */
+.epilogue .wrap { padding-block: 104px 120px; }
+.epilogue h2 { max-width: 16ch; }
+.epilogue p { max-width: 60ch; font-size: 19px; }
+.ledger { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+.ledger div { padding: 18px 16px 18px 0; border-bottom: 1px solid var(--line); }
+.ledger b { display: block; font-family: var(--display); font-weight: 600; font-size: 34px; color: var(--foil); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.ledger span { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--dust); }
+footer { font-family: var(--mono); font-size: 12px; color: var(--dust); }
+footer .wrap { padding-block: 28px; }
+
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .hero .wrap { padding-block: 64px 48px; }
+  .ch-head { grid-template-columns: minmax(0, 1fr); }
+  .ch-delay { text-align: left; }
+  .exhibit { grid-template-columns: minmax(0, 1fr); }
+  .placard { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+  .hud nav { display: none; }
+  .chapter > .wrap { padding-block: 64px 48px; }
+}
+</style>
+
+<header class="hud" aria-label="Story navigation">
+  <div class="wrap">
+    <nav>
+      <a href="#moon">I · Moon</a>
+      <a href="#mars">II · Mars</a>
+      <a href="#beyond">III · Beyond</a>
+      <a href="#epilogue">Epilogue</a>
+    </nav>
+    <div class="delay">Signal delay from Earth <b id="hud-delay">0 s</b></div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="eyebrow">A field guide to the machines we left out there</p>
+    <h1>Left<span>Behind</span></h1>
+    <p class="lede">For sixty years we have sent machines to other worlds and never brought them home. They landed, did their work, and then stopped. Most of them are still exactly where they stopped. This is a walk outward from Earth, past every one of them.</p>
+
+    <div class="scale">
+      <p class="scale-title">How long a radio signal takes to reach them</p>
+      <div class="track" id="track" role="img" aria-label="Signal delay on a log scale: the Moon 1.3 seconds, Mars about 12.5 minutes on average, Pioneer 10 about 19.5 hours.">
+        <div class="axis"></div>
+      </div>
+      <p class="scale-note">Log scale. Mars shown at its average distance; the delay swings from about 3 to 22 minutes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ I. MOON ============ -->
+<section class="chapter" id="moon" data-delay="1.3 s">
+  <div class="wrap">
+    <div class="ch-head">
+      <div>
+        <p class="ch-num">Chapter I · 384,400 km</p>
+        <h2>The Moon</h2>
+        <p class="ch-intro">The only place on this list people have walked. Twelve astronauts came and went between 1969 and 1972. Everything they couldn't afford to carry home stayed where they set it down, in a place with no wind and no rain to move it.</p>
+      </div>
+      <div class="ch-delay"><div class="v">1.3 s</div><div class="u">one-way signal</div></div>
+    </div>
+
+    <div class="exhibits">
+      <article class="exhibit">
+        <div>
+          <h3>Apollo Lunar Module descent stages</h3>
+          <span class="status">Six on the surface</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Six landing sites, from Tranquility Base to Taurus-Littrow</dd></div>
+            <div><dt>Arrived</dt><dd>1969–1972</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>Each Lunar Module came in two halves. When it was time to leave, the top half fired its engine and lifted off. The bottom half, with its gold-wrapped legs, stayed behind and served as the launch pad.</p>
+          <p>Apollo 11's <em>Eagle</em> descent stage still stands at Tranquility Base. A steel plaque on one leg reads: "We came in peace for all mankind."</p>
+          <p class="aside">Orbiter photos taken in 2009 and later still show the descent stages, and the dark tracks the astronauts' boots left around them.</p>
+        </div>
+      </article>
+
+      <article class="exhibit">
+        <div>
+          <h3>Lunar Roving Vehicles</h3>
+          <span class="status">Parked since 1972</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Hadley–Apennine, Descartes Highlands, Taurus–Littrow</dd></div>
+            <div><dt>Arrived</dt><dd>Apollo 15, 16 and 17 (1971–1972)</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>Three electric moon buggies, folded like origami into the side of the lander. They let astronauts range for kilometres instead of a few hundred metres, and they made the last three Apollo missions far richer in science.</p>
+          <p>Before leaving, the Apollo 17 crew parked their rover a short distance away with its TV camera pointed at the lander. Controllers on Earth used it to film the ascent stage lifting off, the last time anyone left the Moon. The rover has sat there ever since, keys in the ignition, so to speak.</p>
+        </div>
+      </article>
+
+      <article class="exhibit">
+        <div>
+          <h3>ALSEP science stations</h3>
+          <span class="status">Switched off 1977</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Apollo 12, 14, 15, 16 and 17 sites</dd></div>
+            <div><dt>Arrived</dt><dd>1969–1972</dd></div>
+            <div><dt>Last heard</dt><dd>30 September 1977</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>The Apollo Lunar Surface Experiments Packages were nuclear-powered science stations that kept working after the astronauts flew home. Seismometers felt moonquakes and meteorite strikes. Other instruments measured heat flow, the solar wind and the thin wisp of lunar atmosphere.</p>
+          <p>NASA turned them off in 1977 to save money. Some of what was left behind still works without power, though: the laser retroreflectors from Apollo 11, 14 and 15. Observatories still bounce lasers off them today.</p>
+          <p class="aside">Those laser measurements show the Moon drifting away from Earth by about 3.8 cm a year.</p>
+        </div>
+      </article>
+
+      <article class="exhibit">
+        <div>
+          <h3>Surveyor landers</h3>
+          <span class="status">Five landed, two crashed</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Scattered across the near side</dd></div>
+            <div><dt>Arrived</dt><dd>1966–1968</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>Before anyone could risk a crew, NASA needed to know whether the Moon's surface would hold a spacecraft up or swallow it in dust. Seven robotic Surveyors went to find out. Five landed softly and sent back thousands of photographs.</p>
+          <p>Surveyor 3 got visitors. In November 1969 the Apollo 12 crew landed within walking distance of it, cut off its camera and carried it home. It is the only spacecraft humans have ever gone back to on another world.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ II. MARS ============ -->
+<section class="chapter" id="mars" data-delay="≈12.5 min">
+  <div class="wrap">
+    <div class="ch-head">
+      <div>
+        <p class="ch-num">Chapter II · 55–400 million km</p>
+        <h2>Mars</h2>
+        <p class="ch-intro">No one has ever been here to park anything. Every machine on Mars landed on its own and drove on instructions minutes old. They did not stop because anyone decided to switch them off. Dust, cold and darkness wore them down one by one.</p>
+      </div>
+      <div class="ch-delay"><div class="v">3–22 min</div><div class="u">one-way signal</div></div>
+    </div>
+
+    <div class="exhibits">
+      <article class="exhibit">
+        <div>
+          <h3>Viking 1 &amp; 2 landers</h3>
+          <span class="status">Silent since 1982</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Chryse Planitia and Utopia Planitia</dd></div>
+            <div><dt>Arrived</dt><dd>July and September 1976</dd></div>
+            <div><dt>Last heard</dt><dd>1980 (Viking 2), 1982 (Viking 1)</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>The first American spacecraft to work on the surface of Mars. They sent back the first clear colour pictures of the ground there: rust-red rocks under a pinkish sky. They also ran the first experiments built to look for life.</p>
+          <p>Viking 1 kept reporting for more than six years. It went quiet only after a software update sent from Earth accidentally pointed its antenna away.</p>
+        </div>
+      </article>
+
+      <article class="exhibit">
+        <div>
+          <h3>Sojourner</h3>
+          <span class="status">Silent since 1997</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Ares Vallis, beside the Pathfinder lander</dd></div>
+            <div><dt>Arrived</dt><dd>4 July 1997</dd></div>
+            <div><dt>Mass</dt><dd>10.6 kg, about the size of a microwave</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>The first wheels on Mars. Sojourner was planned to last a week. It lasted nearly three months, creeping between rocks the team nicknamed Barnacle Bill and Yogi.</p>
+          <p>It depended on the Pathfinder lander to talk to Earth. When the lander's battery gave out, the rover was cut off. Sojourner may have kept driving for a while afterward, circling the lander and waiting for a reply.</p>
+        </div>
+      </article>
+
+      <article class="exhibit">
+        <div>
+          <h3>Spirit &amp; Opportunity</h3>
+          <span class="status">Silent since 2010 / 2018</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Gusev Crater and Meridiani Planum, on opposite sides of the planet</dd></div>
+            <div><dt>Arrived</dt><dd>January 2004</dd></div>
+            <div><dt>Planned lifespan</dt><dd>90 sols each</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>Twin rovers built to last three months. Spirit worked for six years until it got stuck in soft sand and couldn't turn its solar panels toward the winter Sun.</p>
+          <p>Opportunity worked for more than fourteen years and drove 45 km, farther than any vehicle on another world at the time. A planet-wide dust storm in June 2018 blotted out the Sun, and it never woke up again.</p>
+          <p class="aside">A journalist summed up its last data as "My battery is low and it's getting dark." The rover never said that, but the line stuck because it was true.</p>
+        </div>
+      </article>
+
+      <article class="exhibit">
+        <div>
+          <h3>Phoenix &amp; InSight</h3>
+          <span class="status">Silent since 2008 / 2022</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Arctic plains (Phoenix) and Elysium Planitia (InSight)</dd></div>
+            <div><dt>Arrived</dt><dd>2008 and 2018</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>Phoenix landed near the north pole and scraped the soil with a robotic arm. Bright chunks in its trench faded away over a few days. That was water ice turning to vapour, the first ice touched on Mars. The polar winter then buried the lander in frost, and later photos showed a solar panel snapped off under the weight.</p>
+          <p>InSight sat still and listened. Its seismometer recorded more than 1,300 marsquakes and showed what the planet looks like inside. Dust slowly covered its solar panels until, in December 2022, it ran out of power.</p>
+        </div>
+      </article>
+
+      <article class="exhibit">
+        <div>
+          <h3>Ingenuity</h3>
+          <span class="status">Grounded since 2024</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Jezero Crater</dd></div>
+            <div><dt>First flight</dt><dd>19 April 2021</dd></div>
+            <div><dt>Flights</dt><dd>72 (5 were planned)</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>A 1.8 kg helicopter that rode to Mars under the belly of the Perseverance rover. Flying in air one percent as thick as Earth's was supposed to be a five-flight experiment. Ingenuity flew 72 times.</p>
+          <p>In January 2024 a rough landing damaged its rotor blades, and it will never fly again. It still stands upright on a dune.</p>
+          <p class="aside">Tucked under its solar panel is a postage-stamp-sized piece of fabric from the Wright brothers' 1903 Flyer.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ III. BEYOND ============ -->
+<section class="chapter" id="beyond" data-delay="up to ≈19.5 h">
+  <div class="wrap">
+    <div class="ch-head">
+      <div>
+        <p class="ch-num">Chapter III · Asteroids, orbits and open space</p>
+        <h2>Beyond</h2>
+        <p class="ch-intro">Past Mars, the machines stop sitting on surfaces. One rests on an asteroid. Others circle the Sun or a dwarf planet with nothing left to steer them. Two are leaving the solar system for good.</p>
+      </div>
+      <div class="ch-delay"><div class="v">min → hrs</div><div class="u">one-way signal</div></div>
+    </div>
+
+    <div class="exhibits">
+      <article class="exhibit">
+        <div>
+          <h3>NEAR Shoemaker</h3>
+          <span class="status">Silent since 2001</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Surface of asteroid 433 Eros</dd></div>
+            <div><dt>Landed</dt><dd>12 February 2001</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>The first spacecraft to orbit an asteroid. It went into orbit around Eros on Valentine's Day 2000 and spent a year mapping it.</p>
+          <p>It was never designed to land. At the end of the mission, the team tried anyway and eased it down onto the surface. It survived and kept sending data for another two weeks.</p>
+        </div>
+      </article>
+
+      <article class="exhibit">
+        <div>
+          <h3>Dawn</h3>
+          <span class="status">Out of fuel since 2018</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Orbiting the dwarf planet Ceres</dd></div>
+            <div><dt>Mission</dt><dd>Vesta 2011–2012, Ceres 2015–2018</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>Dawn was the first spacecraft to orbit two different worlds beyond the Earth–Moon system. A gentle ion engine carried it from the giant asteroid Vesta to Ceres, where it found bright salt deposits inside Occator Crater.</p>
+          <p>In 2018 it ran out of the fuel it used to point itself and could no longer aim its antenna at Earth. Its orbit was chosen so that it will not crash into Ceres for at least 20 years, which protects a world that might hold traces of water.</p>
+        </div>
+      </article>
+
+      <article class="exhibit">
+        <div>
+          <h3>Kepler Space Telescope</h3>
+          <span class="status">Retired 2018</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Orbiting the Sun, trailing behind Earth</dd></div>
+            <div><dt>Active</dt><dd>2009–2018</dd></div>
+            <div><dt>Planets confirmed</dt><dd>More than 2,600</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>Kepler stared at one patch of sky and watched for stars that dimmed slightly when a planet crossed in front of them. Its findings showed that planets are common, and that there are more planets in the galaxy than stars.</p>
+          <p>Engineers kept it going after two of its reaction wheels failed by using the pressure of sunlight to steady it. When its fuel ran out in October 2018, they sent the command to stop. It now follows Earth around the Sun, slowly falling farther behind.</p>
+        </div>
+      </article>
+
+      <article class="exhibit">
+        <div>
+          <h3>Pioneer 10 &amp; 11</h3>
+          <span class="status">Silent since 2003 / 1995</span>
+          <dl class="placard">
+            <div><dt>Location</dt><dd>Interstellar space, over 100 AU out</dd></div>
+            <div><dt>Launched</dt><dd>1972 and 1973</dd></div>
+            <div><dt>Visited</dt><dd>Jupiter (both), Saturn (Pioneer 11)</dd></div>
+          </dl>
+        </div>
+        <div class="story">
+          <p>The first spacecraft to cross the asteroid belt and fly past Jupiter. Pioneer 11 went on to Saturn. Both kept talking long after their missions ended, until their nuclear power faded. Pioneer 10's last faint signal arrived in January 2003.</p>
+          <p>Each carries a gold-anodized plaque with a drawing of two humans and a map showing where they came from. Pioneer 10 is heading in the general direction of the star Aldebaran and will need about two million years to pass near it.</p>
+          <p class="aside">A signal from Pioneer 10's current position would take about 19 hours to reach us. No one is listening any more.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EPILOGUE ============ -->
+<section class="epilogue" id="epilogue" data-delay="—">
+  <div class="wrap">
+    <p class="eyebrow">Epilogue</p>
+    <h2>A museum with no visitors</h2>
+    <p>None of these machines failed, exactly. They finished their work, usually years after they were expected to, and then the power ran out, the dust settled or the fuel was gone. They are still out there, scattered across the solar system, marking how far we have reached.</p>
+    <p>Someday people may walk up to some of them again, the way the Apollo 12 crew walked up to Surveyor 3.</p>
+    <div class="ledger">
+      <div><b>6</b><span>Descent stages on the Moon</span></div>
+      <div><b>3</b><span>Lunar rovers</span></div>
+      <div><b>3</b><span>Dead rovers on Mars</span></div>
+      <div><b>1</b><span>Grounded helicopter</span></div>
+      <div><b>2</b><span>Probes leaving the Sun</span></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">Left Behind · Distances and dates from NASA mission records.</div></footer>
+
+<script>
+// ----- signal delay scale (log10 seconds) -----
+(function () {
+  const track = document.getElementById('track');
+  const max = Math.log10(86400);
+  const pos = s => (Math.log10(s) / max) * 100;
+  const ticks = [[1, '1 s', 'first'], [60, '1 min'], [3600, '1 h'], [86400, '1 day', 'last']];
+  const marks = [[1.3, 'Moon'], [750, 'Mars'], [70300, 'Pioneer 10']];
+  ticks.forEach(([s, label, cls]) => {
+    const el = document.createElement('div');
+    el.className = 'tick' + (cls ? ' ' + cls : '');
+    el.style.left = pos(s) + '%';
+    el.textContent = label;
+    track.appendChild(el);
+  });
+  marks.forEach(([s, label]) => {
+    const el = document.createElement('div');
+    el.className = 'mark';
+    el.style.left = `clamp(24px, ${pos(s)}%, calc(100% - 40px))`;
+    el.textContent = label;
+    track.appendChild(el);
+  });
+})();
+
+// ----- HUD: current chapter + delay -----
+(function () {
+  const out = document.getElementById('hud-delay');
+  const links = document.querySelectorAll('.hud nav a');
+  const sections = document.querySelectorAll('[data-delay]');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      out.textContent = e.target.dataset.delay;
+      links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(s => io.observe(s));
+  const hero = document.getElementById('top');
+  new IntersectionObserver(([e]) => { if (e.isIntersecting) { out.textContent = '0 s'; links.forEach(a => a.classList.remove('on')); } },
+    { rootMargin: '-45% 0px -50% 0px' }).observe(hero);
+})();
+
+// ----- starfield -----
+(function () {
+  const c = document.getElementById('stars');
+  const ctx = c.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let stars = [], w = 0, h = 0, dpr = 1;
+  function size() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = c.clientWidth; h = c.clientHeight;
+    c.width = w * dpr; c.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round((w * h) / 2600);
+    stars = Array.from({ length: n }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      r: Math.random() * 1.1 + 0.2, a: Math.random() * 0.6 + 0.2,
+      s: Math.random() * 0.15 + 0.02, p: Math.random() * Math.PI * 2
+    }));
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, w, h);
+    for (const s of stars) {
+      const tw = reduce ? 1 : 0.75 + 0.25 * Math.sin(t / 900 + s.p);
+      ctx.globalAlpha = s.a * tw;
+      ctx.fillStyle = '#e6e2d9';
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fill();
+      if (!reduce) { s.x -= s.s; if (s.x < 0) s.x = w; }
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  size(); draw(0);
+  addEventListener('resize', () => { size(); if (reduce) draw(0); });
+})();
+</script>
