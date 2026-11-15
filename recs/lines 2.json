@@ -1,0 +1,471 @@
+[
+ {
+  "id": "cold-04",
+  "chapter": "Transmission received",
+  "speaker": "Narrator",
+  "text": "The faint dot in the middle is the Sun.",
+  "note": ""
+ },
+ {
+  "id": "cold-06",
+  "chapter": "Transmission received",
+  "speaker": "Narrator",
+  "text": "That was the last thing it ever sent home.",
+  "note": ""
+ },
+ {
+  "id": "cold-07",
+  "chapter": "Transmission received",
+  "speaker": "Narrator",
+  "text": "We called back for eight months.",
+  "note": ""
+ },
+ {
+  "id": "cold-08",
+  "chapter": "Transmission received",
+  "speaker": "Narrator",
+  "text": "It never answered.",
+  "note": ""
+ },
+ {
+  "id": "title-00",
+  "chapter": "We Sent Them",
+  "speaker": "Narrator",
+  "text": "We sent them.",
+  "note": ""
+ },
+ {
+  "id": "title-01",
+  "chapter": "We Sent Them",
+  "speaker": "Narrator",
+  "text": "They never came back.",
+  "note": ""
+ },
+ {
+  "id": "prologue-00",
+  "chapter": "Prologue",
+  "speaker": "Narrator",
+  "text": "Every one of them was built by hands that would never touch it again.",
+  "note": ""
+ },
+ {
+  "id": "prologue-01",
+  "chapter": "Prologue",
+  "speaker": "Narrator",
+  "text": "We gave them names. We gave them a purpose.",
+  "note": ""
+ },
+ {
+  "id": "prologue-02",
+  "chapter": "Prologue",
+  "speaker": "Narrator",
+  "text": "Then we sent them into the dark.",
+  "note": ""
+ },
+ {
+  "id": "prologue-03",
+  "chapter": "Prologue",
+  "speaker": "Narrator",
+  "text": "Where the cold kills.",
+  "note": ""
+ },
+ {
+  "id": "prologue-04",
+  "chapter": "Prologue",
+  "speaker": "Narrator",
+  "text": "Where the dust buries.",
+  "note": ""
+ },
+ {
+  "id": "prologue-05",
+  "chapter": "Prologue",
+  "speaker": "Narrator",
+  "text": "Where a single night can last for months.",
+  "note": ""
+ },
+ {
+  "id": "prologue-06",
+  "chapter": "Prologue",
+  "speaker": "Narrator",
+  "text": "None of them were built to come home.",
+  "note": ""
+ },
+ {
+  "id": "prologue-07",
+  "chapter": "Prologue",
+  "speaker": "Narrator",
+  "text": "They were built to go.",
+  "note": ""
+ },
+ {
+  "id": "act1-01",
+  "chapter": "Act I",
+  "speaker": "Narrator",
+  "text": "Fifty-one years before that last message, the first of them arrived.",
+  "note": ""
+ },
+ {
+  "id": "act2-01",
+  "chapter": "Act II",
+  "speaker": "Narrator",
+  "text": "No one has ever gone to Mars to bring one of us home.",
+  "note": ""
+ },
+ {
+  "id": "viking1-01",
+  "chapter": "Viking 1 Lander",
+  "speaker": "Viking 1",
+  "text": "July 20, 1976. Seven years to the day after Eagle.",
+  "note": ""
+ },
+ {
+  "id": "viking1-02",
+  "chapter": "Viking 1 Lander",
+  "speaker": "Viking 1",
+  "text": "I opened my eyes, and showed you the first colours of another world.",
+  "note": ""
+ },
+ {
+  "id": "viking1-03",
+  "chapter": "Viking 1 Lander",
+  "speaker": "Viking 1",
+  "text": "I tasted the soil. I searched it for life.",
+  "note": ""
+ },
+ {
+  "id": "viking1-04",
+  "chapter": "Viking 1 Lander",
+  "speaker": "Viking 1",
+  "text": "For six years, I spoke to Earth.",
+  "note": ""
+ },
+ {
+  "id": "viking1-05",
+  "chapter": "Viking 1 Lander",
+  "speaker": "Viking 1",
+  "text": "Then Earth sent me a small update. It had one mistake in it.",
+  "note": ""
+ },
+ {
+  "id": "viking1-06",
+  "chapter": "Viking 1 Lander",
+  "speaker": "Viking 1",
+  "text": "My antenna turned away from home.",
+  "note": ""
+ },
+ {
+  "id": "viking1-07",
+  "chapter": "Viking 1 Lander",
+  "speaker": "Viking 1",
+  "text": "I am still out there. Facing the wrong way.",
+  "note": ""
+ },
+ {
+  "id": "opportunity-01",
+  "chapter": "Opportunity · MER-B",
+  "speaker": "Opportunity",
+  "text": "You have already heard how my story ends.",
+  "note": ""
+ },
+ {
+  "id": "opportunity-02",
+  "chapter": "Opportunity · MER-B",
+  "speaker": "Opportunity",
+  "text": "They gave me ninety days. I stayed for almost fifteen years.",
+  "note": ""
+ },
+ {
+  "id": "opportunity-03",
+  "chapter": "Opportunity · MER-B",
+  "speaker": "Opportunity",
+  "text": "I crossed forty-five kilometres. A marathon, on another world.",
+  "note": ""
+ },
+ {
+  "id": "opportunity-04",
+  "chapter": "Opportunity · MER-B",
+  "speaker": "Opportunity",
+  "text": "Then the sky began to close.",
+  "note": ""
+ },
+ {
+  "id": "opportunity-05",
+  "chapter": "Opportunity · MER-B",
+  "speaker": "Opportunity",
+  "text": "Day by day, the Sun went out.",
+  "note": ""
+ },
+ {
+  "id": "opportunity-08",
+  "chapter": "Opportunity · MER-B",
+  "speaker": "Opportunity",
+  "text": "We called it more than a thousand times.",
+  "note": ""
+ },
+ {
+  "id": "opportunity-09",
+  "chapter": "Opportunity · MER-B",
+  "speaker": "Opportunity",
+  "text": "On the last night, we played it one song.",
+  "note": ""
+ },
+ {
+  "id": "opportunity-10",
+  "chapter": "Opportunity · MER-B",
+  "speaker": "Narrator",
+  "text": "\"I'll Be Seeing You.\"",
+  "note": "Billie Holiday · final wake-up song · 13 Feb 2019"
+ },
+ {
+  "id": "opportunity-11",
+  "chapter": "Opportunity · MER-B",
+  "speaker": "Opportunity",
+  "text": "It never answered.",
+  "note": ""
+ },
+ {
+  "id": "phoenix-01",
+  "chapter": "Phoenix",
+  "speaker": "Phoenix",
+  "text": "I came to the top of the world to look for water.",
+  "note": ""
+ },
+ {
+  "id": "phoenix-02",
+  "chapter": "Phoenix",
+  "speaker": "Phoenix",
+  "text": "I dug. Something white glittered at the bottom of my trench.",
+  "note": ""
+ },
+ {
+  "id": "phoenix-03",
+  "chapter": "Phoenix",
+  "speaker": "Phoenix",
+  "text": "Four days later, it was gone. Ice, turning straight into vapour.",
+  "note": ""
+ },
+ {
+  "id": "phoenix-04",
+  "chapter": "Phoenix",
+  "speaker": "Phoenix",
+  "text": "I had found it. Water, frozen beneath the dust of Mars.",
+  "note": ""
+ },
+ {
+  "id": "phoenix-05",
+  "chapter": "Phoenix",
+  "speaker": "Phoenix",
+  "text": "Then the Sun set, and it did not rise again.",
+  "note": ""
+ },
+ {
+  "id": "phoenix-06",
+  "chapter": "Phoenix",
+  "speaker": "Phoenix",
+  "text": "The frost came for me in the dark.",
+  "note": ""
+ },
+ {
+  "id": "phoenix-07",
+  "chapter": "Phoenix",
+  "speaker": "Phoenix",
+  "text": "Two years later, they looked for me from orbit.",
+  "note": ""
+ },
+ {
+  "id": "phoenix-08",
+  "chapter": "Phoenix",
+  "speaker": "Phoenix",
+  "text": "The ice had broken my wings.",
+  "note": ""
+ },
+ {
+  "id": "insight-01",
+  "chapter": "InSight",
+  "speaker": "InSight",
+  "text": "Everyone else came to Mars to look. I came to listen.",
+  "note": ""
+ },
+ {
+  "id": "insight-02",
+  "chapter": "InSight",
+  "speaker": "InSight",
+  "text": "I placed my ear on the ground.",
+  "note": ""
+ },
+ {
+  "id": "insight-03",
+  "chapter": "InSight",
+  "speaker": "InSight",
+  "text": "And for four years, Mars spoke to me.",
+  "note": ""
+ },
+ {
+  "id": "insight-04",
+  "chapter": "InSight",
+  "speaker": "InSight",
+  "text": "One thousand, three hundred and nineteen marsquakes.",
+  "note": ""
+ },
+ {
+  "id": "insight-05",
+  "chapter": "InSight",
+  "speaker": "InSight",
+  "text": "Then the dust came. Slowly. Patiently.",
+  "note": ""
+ },
+ {
+  "id": "insight-06",
+  "chapter": "InSight",
+  "speaker": "InSight",
+  "text": "\"My power's really low, so this may be the last image I can send.\"",
+  "note": "Posted in InSight's voice by its mission team · Dec 2022"
+ },
+ {
+  "id": "insight-07",
+  "chapter": "InSight",
+  "speaker": "InSight",
+  "text": "\"Don't worry about me though: my time here has been both productive and serene.\"",
+  "note": "InSight mission team"
+ },
+ {
+  "id": "ingenuity-01",
+  "chapter": "Ingenuity",
+  "speaker": "Ingenuity",
+  "text": "They said it couldn't be done. The air on Mars is one percent as thick as yours.",
+  "note": ""
+ },
+ {
+  "id": "ingenuity-02",
+  "chapter": "Ingenuity",
+  "speaker": "Ingenuity",
+  "text": "April 19, 2021. I lifted off the surface of another planet.",
+  "note": ""
+ },
+ {
+  "id": "ingenuity-03",
+  "chapter": "Ingenuity",
+  "speaker": "Ingenuity",
+  "text": "The first powered flight on another world.",
+  "note": ""
+ },
+ {
+  "id": "ingenuity-04",
+  "chapter": "Ingenuity",
+  "speaker": "Ingenuity",
+  "text": "They asked me for five flights.",
+  "note": ""
+ },
+ {
+  "id": "ingenuity-05",
+  "chapter": "Ingenuity",
+  "speaker": "Ingenuity",
+  "text": "I flew seventy-two.",
+  "note": ""
+ },
+ {
+  "id": "ingenuity-06",
+  "chapter": "Ingenuity",
+  "speaker": "Ingenuity",
+  "text": "On the last one, I came down too hard.",
+  "note": ""
+ },
+ {
+  "id": "ingenuity-07",
+  "chapter": "Ingenuity",
+  "speaker": "Ingenuity",
+  "text": "This is my shadow. Look at my blades.",
+  "note": ""
+ },
+ {
+  "id": "ingenuity-08",
+  "chapter": "Ingenuity",
+  "speaker": "Ingenuity",
+  "text": "I will never fly again. But I am still standing.",
+  "note": ""
+ },
+ {
+  "id": "ingenuity-09",
+  "chapter": "Ingenuity",
+  "speaker": "Ingenuity",
+  "text": "I carry a scrap of fabric from the Wright brothers' first airplane. One hundred and eighteen years apart.",
+  "note": ""
+ },
+ {
+  "id": "kepler-07",
+  "chapter": "Kepler Space Telescope",
+  "speaker": "Narrator",
+  "text": "\"Goodnight.\"",
+  "note": "The engineers' name for Kepler's final commands"
+ },
+ {
+  "id": "epilogue-00",
+  "chapter": "Epilogue",
+  "speaker": "Narrator",
+  "text": "Fifteen machines.",
+  "note": ""
+ },
+ {
+  "id": "epilogue-01",
+  "chapter": "Epilogue",
+  "speaker": "Narrator",
+  "text": "All of them left from here.",
+  "note": ""
+ },
+ {
+  "id": "epilogue-02",
+  "chapter": "Epilogue",
+  "speaker": "Narrator",
+  "text": "The cold took some. The dust buried others.",
+  "note": ""
+ },
+ {
+  "id": "epilogue-03",
+  "chapter": "Epilogue",
+  "speaker": "Narrator",
+  "text": "Some simply ran out of time.",
+  "note": ""
+ },
+ {
+  "id": "epilogue-04",
+  "chapter": "Epilogue",
+  "speaker": "Narrator",
+  "text": "Every one of them gave us more than we asked.",
+  "note": ""
+ },
+ {
+  "id": "epilogue-05",
+  "chapter": "Epilogue",
+  "speaker": "Narrator",
+  "text": "They are still out there. Exactly where they stopped.",
+  "note": ""
+ },
+ {
+  "id": "epilogue-06",
+  "chapter": "Epilogue",
+  "speaker": "Narrator",
+  "text": "Right now, on Mars, Curiosity and Perseverance are still driving.",
+  "note": ""
+ },
+ {
+  "id": "epilogue-07",
+  "chapter": "Epilogue",
+  "speaker": "Narrator",
+  "text": "One day, they will stop too.",
+  "note": ""
+ },
+ {
+  "id": "epilogue-08",
+  "chapter": "Epilogue",
+  "speaker": "Narrator",
+  "text": "And someone will have to remember them.",
+  "note": ""
+ },
+ {
+  "id": "epilogue-09",
+  "chapter": "Epilogue",
+  "speaker": "Narrator",
+  "text": "We sent them.",
+  "note": ""
+ }
+]
